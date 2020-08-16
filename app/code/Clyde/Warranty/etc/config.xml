@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <clyde_warranty>
+            <product_sync_tab>
+                <product_arrtibute_code>manufacturer</product_arrtibute_code>
+            </product_sync_tab>
+        </clyde_warranty>
+    </default>
+</config>

@@ -1,0 +1,99 @@
+<?php
+if($block->getHelper()->getEnableModule() == 1):
+  if($this->getRequest()->getFullActionName() == 'checkout_cart_index'):
+  $clydeData =  array('key'=>$block->getHelper()->getClydeAPIkey(),'environment'=>$block->getHelper()->getClydeProccessMode(), 'type'=>'simple','pageKey'=>'cart');
+
+  ?>
+
+  <script type="text/javascript">
+    window.clydeWidget = <?php echo json_encode($clydeData, JSON_UNESCAPED_SLASHES) ?>;
+    var clydeObj = '';
+    function initAppendCart(){
+        require(['jquery','Clyde_Warranty/js/widget'],
+            function ($, clydeWidget) {
+              if(clydeWidget.clydeObj !== null){
+                <?php if($this->getQuote()->getAllItems()):?>
+                  <?php foreach($this->getQuote()->getAllVisibleItems() as $items):?>
+                        <?php if($items->getWarrantyInfo() == ''):?>
+                        clydeWidget.appendToSelectorWithSku('<?php echo $items->getProduct()->getSku()?>','#xulumus-product-warranty-dropdown-<?php echo $items->getId();?>',createFunction<?php echo $items->getId();?>);
+                        <?php endif;?>
+                  <?php endforeach;?>
+                <?php endif;?>
+              }
+            });
+    }
+
+    require(['jquery','Clyde_Warranty/js/widget'],
+            function ($, clydeWidget) {
+                $( document ).ready(function() {
+                  if(clydeWidget.clydeObj !== null){
+                    clydeObj = clydeWidget;
+                        clydeObj.initWidgetCart(initAppendCart);
+                  }
+                });
+            });
+    function addCartClyde(product,selector,obj, contract){
+            require(['jquery','Clyde_Warranty/js/widget'],
+            function ($, clydeWidget) {
+              if(clydeWidget.clydeObj !== null){
+                clydeWidget.appendToSelectorWithSku(product, selector, obj);
+              }
+            });
+    }
+
+    function removecartWarranty(obj){
+            require(['jquery','Clyde_Warranty/js/warranty'],
+            function ($, warrantyObj) {
+              var clickPart = $(obj).attr('data-part');
+              var element = $(clickPart).attr('data-params');
+              var data = JSON.parse(element);
+              data.update_type = 'remove';
+              data.contract_detail = {'sku':data.warranty};
+              warrantyObj.warrantyAdd(data.removeurl, JSON.stringify(data));
+            });
+    }
+  </script>
+  <?php endif; ?>
+
+  <?php
+  if($this->getRequest()->getFullActionName() == 'catalog_category_view'):
+  $clydeData =  array('key'=>$block->getHelper()->getClydeAPIkey(),'environment'=>$block->getHelper()->getClydeProccessMode(), 'type'=>$this->getHelper()->getWidgetPromptType(),'pageKey'=>'catalog','skuList'=>array(),'page'=>'productList','baseUrl'=>$block->getHelper()->getClydeurl(),'addurl'=>$this->getUrl('warranty/index/addwarranty'));
+
+  ?>
+  <script type="text/javascript">
+    window.clydeWidget = <?php echo json_encode($clydeData, JSON_UNESCAPED_SLASHES) ?>;
+    require(['jquery','Clyde_Warranty/js/widget'],
+            function ($, clydeWidget) {
+              $( document ).ready(function() {
+                if(clydeWidget.clydeObj !== null){
+                      var skuList = clydeWidget.getFormElement();
+                      if(skuList.length > 0){
+                        window.clydeWidget.skuList = skuList;
+                        clydeWidget.initWidget(window.clydeWidget,null);
+                      }
+                }
+              });
+            });
+  </script>
+  <?php endif;
+  if($this->getRequest()->getFullActionName() == 'catalogsearch_result_index'):
+  $clydeData =  array('key'=>$block->getHelper()->getClydeAPIkey(),'environment'=>$block->getHelper()->getClydeProccessMode(), 'type'=>$this->getHelper()->getWidgetPromptType(),'pageKey'=>'catalog','skuList'=>array(),'page'=>'productList','baseUrl'=>$block->getHelper()->getClydeurl(),'addurl'=>$this->getUrl('warranty/index/addwarranty'));
+
+  ?>
+  <script type="text/javascript">
+    window.clydeWidget = <?php echo json_encode($clydeData, JSON_UNESCAPED_SLASHES) ?>;
+    require(['jquery','Clyde_Warranty/js/widget'],
+            function ($, clydeWidget) {
+              $( document ).ready(function() {
+                if(clydeWidget.clydeObj !== null){
+                      var skuList = clydeWidget.getFormElement();
+                      if(skuList.length > 0){
+                        window.clydeWidget.skuList = skuList;
+                        clydeWidget.initWidget(window.clydeWidget,null);
+                      }
+                }
+              });
+            });
+  </script>
+  <?php endif; ?>
+<?php endif;?>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+	<!--referenceContainer name="product.info.price">
+	    <block class="Magento\Cms\Block\Block" name="free_shipping">
+	        <arguments>
+	            <argument name="block_id" xsi:type="string">free-shipping</argument>
+	        </arguments>
+	    </block>
+	</referenceContainer-->
+    
+    <referenceContainer name="product.info.main">
+		<block class="Magetop\Brand\Block\Product\View" name="product.info.freeshipping" after="product.info.price" template="Magento_Catalog::product/view/shipping.phtml"/>
+        <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.specs" template="product/view/specifications.phtml">
+            <arguments>
+                <argument name="at_call" xsi:type="string">getSpecifications</argument>
+                <argument name="at_code" xsi:type="string">specifications</argument>
+                <argument name="css_class" xsi:type="string">specifications</argument>
+                <argument name="add_attribute" xsi:type="string">itemprop="specifications"</argument>
+            </arguments>
+        </block>
+         <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.dimension" template="product/view/dimension.phtml" after="-">
+            <arguments>
+                <argument name="at_call" xsi:type="string">getDimension</argument>
+                <argument name="at_code" xsi:type="string">dimension</argument>
+                <argument name="css_class" xsi:type="string">dimension</argument>
+                <argument name="add_attribute" xsi:type="string">itemprop="dimension"</argument>
+            </arguments>
+        </block>
+    </referenceContainer>
+     <move element="product.info.overview" destination="product.info.main" before="product.info.specs" />
+    <move element="product.info.description" destination="product.info.main" before="product.info.specs"/>
+    <move element="product.attributes" destination="product.info.main" before="product.info.dimension"/>
+    <move element="product.info.sku" destination="product.info.main" after="page.main.title" />
+   <!--  <move element="product.info.specs" destination="product.info.description" after="-" /> -->
+    <referenceBlock name="product.info.addto" remove="true" />
+    <referenceBlock name="product.info.mailto" remove="true" />
+    <referenceBlock name="product.info.review" remove="true" />
+    <referenceBlock name="product.info.stock.sku" remove="true" />
+    <!-- <referenceBlock name="product.attributes" remove="true" /> -->
+</page>

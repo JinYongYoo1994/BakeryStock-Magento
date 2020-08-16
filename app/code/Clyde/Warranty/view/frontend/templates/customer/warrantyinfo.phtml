@@ -1,0 +1,85 @@
+    <div class="table-wrapper orders-history">
+      <table id="my-orders-table" class="data table table-order-items history">
+            <thead>
+                <tr>
+                    <th scope="col" class="col id"><?php echo __('Order #');?></th>
+                    <th scope="col" class="col warranty_id"><?php echo __('Rule Id');?></th>
+                    <th scope="col" class="col product_name"><?php echo __('Product Name');?></th>
+                    <th scope="col" class="col product_sku"><?php echo __('Product sku');?></th>
+                    <th scope="col" class="col warranty_info"><?php echo __('Info');?></th>
+                    <th scope="col" class="col warranty_amount"><?php echo __('Amount');?></th>
+                    <th scope="col" class="col warranty_remaining_days"><?php echo __('Remaining Time');?></th>
+                </tr>
+            </thead>
+            <tbody>
+             <?php
+                   $customerWarrantyCollection = $block->getCollection();
+                  if ($customerWarrantyCollection->getSize() > 0) :
+            ?>
+                <?php foreach ($customerWarrantyCollection as $warrantyCustomer) : ?>
+                 <tr> 
+                   <td data-th="Order #" class="col id"><?php echo $warrantyCustomer->getIncrementId();?></td>
+                   <td data-th="Warranty Id" class="col warranty_id" ><?php echo $warrantyCustomer->getPlanId();?></td>
+                   <td data-th="Product Name" class="col product_name" ><?php echo $warrantyCustomer->getName();?></td>
+                   <td data-th="Product sku" class="col product_sku" ><?php echo $warrantyCustomer->getSku();?></td>
+                   <td data-th="Warranty Info" class="col warranty_info" >
+                   <?php 
+                      $data = $this->_helper->decryptString($warrantyCustomer->getWarrantyInfo());
+                      $html = '';
+                      $_warrantytype = $this->warrantytype->getOptionArray();
+                          if(isset($data['name']) &&  $data['name'] != ''){
+                              $html .= '<p><b>'.__('Name').' : </b>'.$data['name'].'</p>';
+                          }
+
+                          if(isset($data['sku']) &&  $data['sku'] != ''){
+                              $html .= '<p><b>'.__('Plan SKU').' : </b>'.$data['sku'].'</p>';
+                          }
+
+                          if(isset($data['warranty_type']) &&  $data['warranty_type'] != ''){
+                              $html .= '<p><b>'.__('Type').' : </b>'.__($_warrantytype[$data['warranty_type']]).'</p>';
+                              if($data['warranty_type'] == \Clyde\Warranty\Model\Warranty\Warrantytype::FIXED){
+                                  $html .= '<p><p><b>'.__('Amount').' : </b>'.$this->getprice($data['customer_cost']).'</p>';
+                              }elseif($data['warranty_type'] == \Clyde\Warranty\Model\Warranty\Warrantytype::PERCENT && isset($data['product_price']) && isset($data['warranty_applied_price'])){
+                                if(isset($data['rule_product_price'])){
+                                  $html .= '<p><b>'.__('Amount').' : </b>'.__('%1 of %2 = %3', $data['customer_cost'].'%', $this->getprice($data['rule_product_price']), $this->getprice($data['warranty_applied_price'])).'</p>';
+                                }
+                              }
+
+                               $remaining_days = 0;
+                              if($warrantyCustomer->getCreatedAt()){
+                                $html .= $this->calulateWarrantyPeriod($warrantyCustomer, $data);
+                              }
+                          }
+
+                      echo $html;
+                    ?>
+                   </td>
+                   <td data-th="Warranty Amount" class="col warranty_amount" ><?php echo $this->getprice($warrantyCustomer->getCustomerCost());?></td>
+                   <td data-th="Remaining Days" class="col warranty_remaining_days" >
+                   <?php
+                      if(isset($data['year_term']) && $data['year_term'] > 0){
+                         $remaining_days = $this->calulateWarrantyPeriod($warrantyCustomer, $data, 'value');
+                          if(isset($remaining_days['remaining'])) {
+                              echo '<span class="remaining">'.$remaining_days['remaining'].'</td>';
+                          } else {
+                              echo '<span class="expired">'.__('Expired').'</span>';
+                          }
+                      } else {
+                            echo '<span class="remaining">'.__('Lifetime').'</span>';   
+                      }   
+                   ?>   
+                   </td>
+                 </tr>
+                <?php endforeach;?> 
+             <?php else: ?>
+                 <tr> 
+                  <td colspan="6" align="center"><?php echo __('Row not found');?></td>
+                 </tr>  
+             <?php endif; ?>  
+            </tbody>
+      </table>
+    </div>
+    <div class="order-products-toolbar toolbar bottom">
+        <?php echo $block->getPagerHtml(); ?>
+    </div>
+    

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_import_bunch_save_after">
+        <observer name="clyde_warranty_import_bunch_save_after" instance="Clyde\Warranty\Model\Observer\Adminhtml\ImportBunchSaveAfter" />
+    </event>
+    <event name="controller_action_catalog_product_save_entity_after">
+        <observer name="clyde_warranty_product_save_entity_after" instance="Clyde\Warranty\Model\Observer\Adminhtml\ProductSaveEntityAfter" />
+    </event>
+</config>

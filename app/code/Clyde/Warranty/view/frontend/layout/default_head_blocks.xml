@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+	    <css src="Clyde_Warranty::css/warranty.css" />
+    	<css src="Clyde_Warranty::js/main.js" media="all" />
+    </head>
+    <body>
+    	<referenceBlock name="head.additional">
+            <block class="Clyde\Warranty\Block\Dynamicsetting" name="dynamicsetting.components.head" as="dynamicsetting_head" template="Clyde_Warranty::setting/head.phtml"/>
+        </referenceBlock>
+		<referenceContainer name="after.body.start">
+		    <block class="Clyde\Warranty\Block\Dynamicsetting" name="dynamicsetting.components" as="dynamicsetting" template="Clyde_Warranty::setting/dynamic.phtml"/>
+		</referenceContainer>
+    </body>
+</page>

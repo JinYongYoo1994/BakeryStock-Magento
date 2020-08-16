@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- <event name="controller_action_postdispatch">
+        <observer name="warranty_sales_controller_action_postdispatch" instance="Clyde\Warranty\Model\Observer\ActionPostDispatch"/>
+    </event> -->
+    <event name="checkout_cart_product_update_after">
+        <observer name="warranty_cart_product_update_after" instance="Clyde\Warranty\Model\Observer\productUpdateAfter" />
+    </event>
+    <event name="checkout_cart_update_items_after">
+        <observer name="warranty_checkout_cart_update_items_after" instance="Clyde\Warranty\Model\Observer\cartUpdateAfter" />
+    </event>
+</config>

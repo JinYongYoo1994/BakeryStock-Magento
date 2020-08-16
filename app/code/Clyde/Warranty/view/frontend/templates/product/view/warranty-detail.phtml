@@ -1,0 +1,31 @@
+<?php if($this->getModuleEnable() == 1):?>
+<?php   $warrants = $this->getWarrantyDetail();
+
+?>
+<input type="hidden" name="clyde-warranty-event-count" value="0" id="clyde-warranty-event-count"/>
+<input type="hidden" name="selected_rule_id[<?php echo $this->getProduct()->getSku(); ?>]" value="0" id="selected_rule_id"/>
+<input type="hidden" name="clyde-warranty-base-url" value="<?php echo $block->getUrl('warranty/index/warrantydetail'); ?>" id="clyde-warranty-base-url"/>
+<input type="hidden" name="warranty[<?php echo $this->getProduct()->getSku(); ?>]" value="" id="warranty"/>
+<input type="hidden" name="contract_detail[<?php echo $this->getProduct()->getSku(); ?>]" value="" id="contract_detail"/>
+<input type="hidden" name="product_type" value="<?php echo $this->getProduct()->getTypeId(); ?>" id="product_type"/>
+<input type="hidden" name="clyde_product_item_edit" value='<?php echo json_encode($block->getQuoteItemId())?>' id="clyde_product_item_edit"/>
+<?php echo $this->getLayout()->createBlock('Clyde\Warranty\Block\Product\View\Type\Configurable')->setProduct($this->getproduct())->setTemplate('Clyde_Warranty::product/view/type/options/configurable.phtml')
+          ->toHtml(); ?>
+<div class="xulumus-main-container">
+    <div class="field required" id="xulumus-product-warranty-dropdown"></div>
+</div>
+  <script type="text/javascript">
+        <?php $clydeData = array('key'=>$block->getHelper()->getClydeAPIkey() , 'environment' => $block->getHelper()->getClydeProccessMode() , 'defaultSelector'=>'#xulumus-product-warranty-dropdown','skuList'=>$block->getAllSkus(),'type'=>$this->getHelper()->getWidgetPromptType(), 'pageKey'=>'productPage', 'baseUrl'=>$block->getHelper()->getClydeurl()); ?>
+        require(['jquery','Clyde_Warranty/js/widget'],
+          function ($, clydeWidget) {
+            $( document ).ready(function() {
+              if(clydeWidget.clydeObj !== null){
+                var options = <?php echo json_encode($clydeData, JSON_UNESCAPED_SLASHES);?>;
+                clydeWidget.initWidget(options,"<?php echo $this->getProduct()->getSku(); ?>");
+              }
+            });
+
+          });
+
+  </script>
+<?php endif;?>

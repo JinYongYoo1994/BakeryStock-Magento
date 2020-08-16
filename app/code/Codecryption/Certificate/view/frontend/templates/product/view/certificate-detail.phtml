@@ -1,0 +1,17 @@
+<?php if($this->getModuleEnable() == 1):?>
+	<?php $product = $block->getProduct();
+		$mapField = $block->getMapField();
+	?>
+  <div class="certification-block">
+    <?php $attri = $product->getData($block->getHelper()->getAttributValue());//getResource()->getAttribute($block->getHelper()->getAttributValue())->getFrontend()->getValue($product);
+        $data = explode(',', $attri);
+        $data = array_map('trim', $data);
+        foreach ($data as $value) {
+            if(isset($mapField[$value])){
+                echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($mapField[$value])->toHtml();
+            } 
+        } 
+        
+    ?>
+</div>
+<?php endif;?>

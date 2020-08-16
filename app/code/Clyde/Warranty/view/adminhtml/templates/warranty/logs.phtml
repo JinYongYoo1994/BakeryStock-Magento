@@ -1,0 +1,82 @@
+<?php $orders = $block->getAllOrderLog();?>
+<?php $products = $block->getProductLog();?>
+<div class="clyde-log-container">
+<div class="clyde-log-product" style="width: 47%; display: inline-block; vertical-align: top;">
+<?php if(count($products) > 0):?>
+            <h2><?php echo __('Clyde Sync Product log')?></h2>
+            <table class="data-grid data-grid-draggable">
+                <thead>
+                    <tr>
+                    <th class="data-grid-th" >
+                        <span class="data-grid-cell-content"><?php echo __('File Name');?></span>
+                    </th>
+                    <th class="data-grid-th" >
+                        <span class="data-grid-cell-content" ><?php echo __('Created Date');?></span>
+                    </th>
+                    <th class="data-grid-th" >
+                        <span class="data-grid-cell-content"><?php echo __('Action');?></span>
+                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($products as $value):?>
+                        <tr class="data-row">
+                            <td >
+                                <div class="data-grid-cell-content" ><?php echo $value['filename'];?></div>
+                            </td><td class="">
+                            <div class="data-grid-cell-content" ><?php echo $value['fileCreated'];?></div>
+                        </td><td class="data-grid-actions-cell">
+                        <a class="action-menu-item"  target="_self" href="<?php echo $value['filepath'];?>"><?php echo __('View');?></a>
+                    </td>
+                </tr>
+                    <?php endforeach;?>
+        </tbody>
+    </table>
+    <div class="accordion">
+        <div class="config">
+          
+        </div>
+    </div>
+    
+<?php endif;?>
+</div>
+<div class="clyde-log-product" style="width: 47%; display: inline-block; margin-left: 40px; vertical-align: top;">
+<?php if(count($orders) > 0):?>
+            <h2><?php echo __('Clyde Sync Order log')?></h2>
+            <table class="data-grid data-grid-draggable">
+                <thead>
+                    <tr>
+                    <th class="data-grid-th" >
+                        <span class="data-grid-cell-content"><?php echo __('File Name');?></span>
+                    </th>
+                    <th class="data-grid-th" >
+                        <span class="data-grid-cell-content" ><?php echo __('Created Date');?></span>
+                    </th>
+                    <th class="data-grid-th" >
+                        <span class="data-grid-cell-content"><?php echo __('Action');?></span>
+                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($orders as $order):?>
+                        <tr class="data-row">
+                            <td >
+                                <div class="data-grid-cell-content" ><?php echo $order['filename'];?></div>
+                            </td><td class="">
+                            <div class="data-grid-cell-content" ><?php echo $order['fileCreated'];?></div>
+                        </td><td class="data-grid-actions-cell">
+                        <a class="action-menu-item"  target="_self" href="<?php echo $order['filepath'];?>">View</a>
+                    </td>
+                </tr>
+                    <?php endforeach;?>
+        </tbody>
+    </table>
+    <div class="accordion">
+        <div class="config">
+            <p class="note"><span><b>Note: </b><?php echo __("It's display order log when sync apply");?></span></p>
+        </div>
+    </div>
+    
+<?php endif;?>
+</div>
+</div>

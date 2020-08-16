@@ -1,0 +1,49 @@
+<?php 
+$collection = $this->getProductCollection();
+?>
+<?php if($collection->count()>0):?>
+    <div class="search-global-field">
+<ul class="search-global-menu">
+<?php foreach($collection as $product):?>
+    <li class= "item">
+    <h4 class="autocomplete-product-name" data-product="<?php echo $product->getId()?>"><?php echo $product->getName().' (Product Sku : '.$product->getSku().')'?></h4>
+    <?php $warranty = $this->getWarrantyCollection($product);?>
+    <ul class="warranty-detail" id="warranty_detail_<?php echo $product->getId()?>">
+    <?php if(count($warranty) > 0):
+        foreach($warranty as $item):?>
+        <li class="item">
+            <span><?php echo $item['name'] ?></span>
+            <span></span>
+            <a class="waranty-edit" href="<?php echo $this->getUrl('warranty/index/edit', array('id'=>$item['warranty_id']))?>"><?php echo __('Edit')?></a>
+        </li>
+        <?php endforeach; ?>
+   <?php else: ?>
+            <li class="item"><?php echo __('No qualifying warranties found.')?></li>
+   <?php endif; ?>
+           </ul>
+    </li>
+<?php endforeach;?>
+</ul>
+</div>
+<script type="text/javascript">
+require(
+        ['jquery','mage/translate'
+    ], function($){
+        $( document ).ready(function() {
+         $('.autocomplete-product-name').click(function(event) {
+               event.preventDefault();
+              var element = $(this);
+              var idvalue =  element.attr('data-product');
+              $('.warranty-detail').hide('slow');
+              if($('#warranty_detail_'+idvalue).is(":visible")){
+                  $('#warranty_detail_'+idvalue).hide('slow');      
+              }else{
+                  $('#warranty_detail_'+idvalue).show('slow');      
+              }
+                
+         });
+                
+      });
+ });
+</script>
+<?php endif;?>

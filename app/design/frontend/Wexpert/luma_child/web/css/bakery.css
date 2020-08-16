@@ -1,0 +1,68 @@
+body .lof-autosearch .button-search {
+    background-color: #FE0000;
+	border: 1px solid #FE0000;
+}
+.bannertext-button {
+    background-color: #FE0000;
+	border: 1px solid #FE0000;
+}
+.banner-overlay {
+	opacity: 0.26;
+}
+.navigation .level0:last-child .level-top {
+    color: #FE0000;
+}
+.fcol .block.newsletter .actions button {
+    background-color: #FE0000;
+	border-color: #FE0000;
+}
+body .grid li.product-item .actions-primary .action {
+    background-color: #FE0000!important;
+	border-color: #FE0000!important;
+}
+.fcol .block.newsletter .actions button:hover {
+    background: #ff6666!important;
+    border: 1px solid #ff6666!important;
+}
+.navigation .level0:last-child .level-top:hover{
+	color: #ff6666!important;
+}
+.bannertext-button:hover {
+    background: #ff6666;
+    border: 1px solid #ff6666;
+}
+.small-promo .small-promo-heading:hover, .product-info-main .shipping .heading {
+    color: #FE0000;
+}
+body .minicart-wrapper .action.showcart .counter.qty {
+    background-color: #FE0000;
+    border: none;
+}
+.catalog-product-view .product-info-main tbody tr td.td-title {
+    background-color: #474747;
+}
+.box-tocart .actions button {
+    background-color: #FE0000;
+    border: 1px solid #FE0000;
+}
+.box-tocart .action.primary:hover {
+    background-color: #ff6666 !important;
+    border: 1px solid #ff6666 !important;
+}
+.product-item button.action.tocart.primary {
+    background-color: #FE0000;
+    border-color: #FE0000;
+}
+.product-item button.action.tocart.primary:hover {
+    background-color: #ff6666!important;
+    border-color: #ff6666!important;
+}
+@media (min-width: 1024px){
+	body .navigation .level0:not(.mpbrand-top-link) .submenu a:hover, body .navigation .level0:not(.mpbrand-top-link) .submenu a.ui-state-focus {
+		background: #FE0000;
+		border-color: #FE0000;
+	}
+	body .navigation .level0.active > .level-top, body .navigation .level0.has-active > .level-top {
+		color: #FE0000;
+	}
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="codecryption" translate="label" sortOrder="10">
+            <label>Codecryption</label>
+        </tab>
+        <section id="certificate" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Certificate Setting</label>
+            <tab>codecryption</tab>
+            <resource>Codecryption_Certificate::certificate_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_attribute" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Please Enter Product Attribute</label>
+                    <comment>Add product attribute which you wanto map</comment>
+                </field>
+                <field id="certificate_field_map" translate="label" sortOrder="68" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Certificate Field Map</label>
+                    <frontend_model>Codecryption\Certificate\Block\Adminhtml\Form\Field\Mapfield</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Field map</comment>
+                </field>
+               <!--  <field id="blank_with_variations_product_sku" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Define Product Sku for Blank with Variations</label>
+                    <frontend_model>Themagnet\Productimport\Block\Adminhtml\Form\Field\Productsku</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                     <comment>Add product sku which is use blank with variations template</comment>
+                </field> -->
+            </group>
+        </section>
+    </system>
+</config>

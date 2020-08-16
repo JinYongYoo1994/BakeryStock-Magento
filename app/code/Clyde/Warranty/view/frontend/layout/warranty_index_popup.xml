@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+       <referenceBlock name="additional.product.info">
+           <block class="Clyde\Warranty\Block\Checkout\Cart\Warranty" name="additional.product.info.warranty" template="Clyde_Warranty::checkout/cart/item/renderer/warranty.phtml">
+           		<block class="Clyde\Warranty\Block\Checkout\Cart\Action" name="additional.product.info.warranty.action" template="Clyde_Warranty::checkout/cart/item/renderer/action.phtml"/>
+           </block>
+       </referenceBlock>
+    </body>
+</page>

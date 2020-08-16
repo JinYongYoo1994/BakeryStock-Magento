@@ -1,0 +1,15 @@
+<script type="text/javascript">
+	var WARRANTY_SEARCH = "<?php echo $this->getUrl('warranty/products/search')?>";
+    var WARRANTY_LOAD_URL = "<?php echo $this->getViewFileUrl('Clyde_Warranty::images/ajax-loader.gif'); ?>";
+</script>
+<div id="popup-mpdal" style="display:none;">
+    <div class="admin__field warranty-serach-box">
+        <label class="admin__field-label" >
+            <span>Product SKU</span>
+        </label>
+        <div class="admin__field-control" >
+        <input class="admin__control-text" type="text" name="warranty_serach" placeholder="" aria-describedby="notice-PP9I4Y0" id="warranty_serach_input" />
+        <div id="warranty_autocomplete" class="warranty-autocomplete"></div>
+        </div>
+    </div>
+</div>

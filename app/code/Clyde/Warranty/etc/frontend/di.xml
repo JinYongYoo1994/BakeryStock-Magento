@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="clyde_productlist_Plugin" type="Clyde\Warranty\Plugin\Block\Product\AbstractProduct"/>
+    </type>
+    <type name="Magento\Checkout\Block\Cart\Item\Renderer">
+        <plugin name="clyde_cart_item_Plugin" type="Clyde\Warranty\Plugin\Block\Cart\Item\Renderer"/>
+    </type>
+</config>

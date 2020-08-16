@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_commit_after">
+        <observer name="warranty_order_place_after" instance="Clyde\Warranty\Model\Observer\OrderAfterEvent" />
+    </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="warranty_cart_product_add_after" instance="Clyde\Warranty\Model\Observer\prepareFullOptions" />
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="warranty" instance="Clyde\Warranty\Model\Observer\Adminhtml\Product" />
+    </event>
+    <event name="sales_order_shipment_save_after">
+        <observer name="sales_order_shipment_after" instance="Clyde\Warranty\Model\Observer\Adminhtml\SalesOrderShipmentAfter" />
+    </event>
+    <event name="sales_order_creditmemo_save_after">
+        <observer name="sales_order_creditmemo_after" instance="Clyde\Warranty\Model\Observer\Adminhtml\SalesOrderCreditmemoAfter" />
+    </event>
+</config>

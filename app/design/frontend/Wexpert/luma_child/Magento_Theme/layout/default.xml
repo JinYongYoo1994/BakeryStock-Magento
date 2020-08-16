@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+	
+        <referenceContainer name="header.panel">
+			<block class="Magento\Theme\Block\Html\Header" name="topleftblock" template="html/topleftblock.phtml"/>
+        </referenceContainer>		
+		
+		<referenceContainer name="header-wrapper">
+		
+			<container name="header.left.content" as="header.left.content" htmlTag="div" htmlClass="header-left-content" before="-">
+				<block class="Magento\Theme\Block\Html\Header" name="header.wrapper.right.content" template="html/headerrightblock.phtml" after="-"/>
+			</container>
+			
+			<container name="header.right.content" as="header.right.content" htmlTag="div" htmlClass="header-right-content" after="header.left.content"/>
+        
+		</referenceContainer>
+		
+    	<referenceBlock name="catalog.compare.link" remove="true"/>
+		
+		<move element="logo" destination="header.left.content" before="-"/>
+		<move element="top.Search" destination="header.left.content" after="logo"/>
+		<move element="header.wrapper.right.content" destination="header.left.content" after="topSearch"/>
+		
+		<move element="minicart" destination="header.right.content" before="-"/>
+		
+    	<referenceBlock name="footer_links" remove="true"/>
+    	<referenceBlock name="form.subscribe" remove="true"/>
+    	<referenceBlock name="copyright" remove="true"/>
+        <referenceContainer name="footer-container">
+            <container name="footercontent" as="footercontent" label="Page Footer Content" htmlTag="div" htmlClass="footer-content">
+                <block class="Magento\Theme\Block\Html\Footer" name="footer_content" as="store_switcher" template="Magento_Theme::html/footer-content.phtml">
+					<block class="Magento\Newsletter\Block\Subscribe" name="form.subscribe-content" as="formsubscribe" before="-" template="Magento_Newsletter::subscribe.phtml" ifconfig="newsletter/general/active"/>
+				</block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

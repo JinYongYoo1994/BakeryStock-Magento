@@ -1,0 +1,57 @@
+<?php
+$moduleId       = rand().time();
+$module_seletor = "autosearch".$moduleId;
+$helper         = $this->helper('Magento\Search\Helper\Data');
+$searchHelper   = $this->helper('Lof\Autosearch\Helper\Data');
+$blockId        = 'lof-search' . $moduleId;
+?>
+<div class="<?php echo $prefix; ?> lof-autosearch box search_box" id="<?php echo $blockId ?>">
+    <form method="GET" id="form<?php echo $blockId ?>" action="<?php echo $this->getCatalogSearchLink(); ?>">
+        <?php if(!empty($categories)) { ?>
+            <div class="filter_type category-filter">
+                <span class="fa fa-caret-down"></span>
+                <select name="cat">
+                    <option value="<?php echo $this->getRootCategoryId(); ?>"><?php echo __("All Categories"); ?></option>
+                    <?php echo $categories; ?>
+                </select>
+            </div>
+            <?php } ?>
+            <div id="<?php echo $module_seletor ?>" class="lof-search control">
+                <input 
+                type="text"
+                name="<?php echo $helper->getQueryParamName() ?>"
+                value="<?php echo $helper->getEscapedQueryText() ?>"
+                placeholder="<?php echo __('What are you looking for?'); ?>"
+                class="input-text"
+                autocomplete="off"/>
+                <button class="button-search">
+					<span class="loading">
+					<svg aria-hidden="true" focusable="false" role="presentation" width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+					  <g fill-rule="nonzero" fill="currentColor">
+						<path d="M13 26C5.82 26 0 20.18 0 13S5.82 0 13 0s13 5.82 13 13-5.82 13-13 13zm0-3.852a9.148 9.148 0 1 0 0-18.296 9.148 9.148 0 0 0 0 18.296z" opacity=".29"></path><path d="M13 26c7.18 0 13-5.82 13-13a1.926 1.926 0 0 0-3.852 0A9.148 9.148 0 0 1 13 22.148 1.926 1.926 0 0 0 13 26z"></path>
+					  </g>
+					</svg>
+					</span>
+					<span>
+						<svg aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21">
+						  <path fill="currentColor" fill-rule="evenodd" d="M12.514 14.906a8.264 8.264 0 0 1-4.322 1.21C3.668 16.116 0 12.513 0 8.07 0 3.626 3.668.023 8.192.023c4.525 0 8.193 3.603 8.193 8.047 0 2.033-.769 3.89-2.035 5.307l4.999 5.552-1.775 1.597-5.06-5.62zm-4.322-.843c3.37 0 6.102-2.684 6.102-5.993 0-3.31-2.732-5.994-6.102-5.994S2.09 4.76 2.09 8.07c0 3.31 2.732 5.993 6.102 5.993z"/>
+						</svg>
+					</span>
+				</button>
+            </div>
+        </form>
+        <?php if(($trendingCollection = $block->getTerms()) && $trendingCollection->getSize()){ ?>
+            <div id="search-tags" class="search-tags">
+                <div class="title">
+                    <span><?php echo __('Trending keywords:'); ?></span>
+                </div>
+                <div class="content">
+                    <?php foreach ($trendingCollection as $_term): ?>
+                    <a href="<?php echo $this->getCatalogSearchLink(); ?>?q=<?php echo $block->escapeHtml($_term->getQueryText()) ?>" style="font-size:<?php echo $_term->getPopularity()/100*80+90 ?>%;">
+                        <?php echo $block->escapeHtml($_term->getQueryText()) ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php } ?>
+    </div>

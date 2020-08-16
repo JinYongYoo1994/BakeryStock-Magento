@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Backend/etc/menu.xsd">
+    <menu>
+         <add id="Clyde_Warrantysale::warrantysale" title="Clyde Warranty Sales" module="Clyde_Warranty"  sortOrder="25" dependsOnModule="Clyde_Warranty" parent="Magento_Sales::sales" action="warranty/warrantysale" resource="Clyde_Warranty::warrantysale"/>
+         <add id="Clyde_Warrantysale::import" title="Clyde System Logs" module="Clyde_Warranty"  sortOrder="9999" dependsOnModule="Clyde_Warranty" parent="Magento_Backend::system" action="warranty/plan/import" resource="Clyde_Warranty::import"/>
+    </menu>
+</config>

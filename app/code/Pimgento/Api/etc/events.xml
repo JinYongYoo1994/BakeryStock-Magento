@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Pimgento API Module
+ *
+ * @author    Agence Dn'D <contact@dnd.fr>
+ * @copyright 2018 Agence Dn'D
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      https://www.pimgento.com/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="pimgento_import_step_start">
+        <observer name="pimgento.import.step.start" instance="Pimgento\Api\Observer\PimgentoImportStepStartObserver" />
+    </event>
+    <event name="pimgento_import_step_finish">
+        <observer name="pimgento.import.step.finish" instance="Pimgento\Api\Observer\PimgentoImportStepFinishObserver" />
+    </event>
+    <event name="catalog_category_delete_after">
+        <observer name="pimgento.catalog.category.delete.after" instance="Pimgento\Api\Observer\Deletion\CategoryObserver" />
+    </event>
+    <event name="eav_entity_attribute_set_delete_after">
+        <observer name="pimgento.eav.entity.attribute.set.delete.after" instance="Pimgento\Api\Observer\Deletion\FamilyObserver" />
+    </event>
+    <event name="catalog_entity_attribute_delete_after">
+        <observer name="pimgento.catalog.entity.attribute.delete.after" instance="Pimgento\Api\Observer\Deletion\AttributeObserver" />
+    </event>
+    <event name="catalog_product_delete_after">
+        <observer name="pimgento.catalog.product.delete.after" instance="Pimgento\Api\Observer\Deletion\ProductObserver" />
+    </event>
+</config>

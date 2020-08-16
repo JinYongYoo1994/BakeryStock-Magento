@@ -1,0 +1,8 @@
+<?php $status = $block->getConnect();
+     
+    if(isset($status['success']) && $status['success'] == 1): ?>
+        <div class="status-clyde" style="color: green;font-size: 14px;font-weight: 600;"><?php echo __('Connected to Clyde');?></div>
+    <?php else: ?>
+        <div class="status-clyde" style="color: red;font-size: 12px;font-weight: 500;" ><?php echo __('Please check API key detail');?></div>
+    <?php endif; ?>
+ <?php $block->isCronInitiate(); ?>

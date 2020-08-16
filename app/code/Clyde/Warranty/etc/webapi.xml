@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/warranty/sales-data/:status" method="GET">
+        <service class="Clyde\Warranty\Api\SalesWarrantyInterface" method="getSalesData"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/warranty/contract/:id" method="GET">
+        <service class="Clyde\Warranty\Api\SalesWarrantyContractInterface" method="getClydeContract"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+    <route url="/V1/warranty/contracts-retry" method="GET">
+        <service class="Clyde\Warranty\Api\SalesWarrantyContractInterface" method="getContractRetry"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+</routes>

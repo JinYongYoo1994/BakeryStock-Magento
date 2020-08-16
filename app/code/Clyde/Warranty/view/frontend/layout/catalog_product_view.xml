@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.form.content">
+            <block class="Clyde\Warranty\Block\Product\View\Warrantydetail" name="product.info.warranty" as="warranty_detail" 
+            before="-" template="Clyde_Warranty::product/view/warranty-detail.phtml"/>
+        </referenceContainer>
+        
+        <referenceContainer name="alert.urls">
+            <referenceBlock name="product.info.options.wrapper.bottom">
+                <block class="Clyde\Warranty\Block\Product\View\Warrantydetail" name="product.info.warranty.1" as="warranty_detail_1" 
+                before="-" template="Clyde_Warranty::product/view/warranty-detail.phtml"/>
+            </referenceBlock>
+        </referenceContainer>
+        
+    </body>
+</page>

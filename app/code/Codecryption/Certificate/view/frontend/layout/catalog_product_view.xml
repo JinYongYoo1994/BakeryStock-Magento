@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.form.content">
+            <block class="Codecryption\Certificate\Block\Product\View\Certificate" name="product.info.certificate" as="certificate_detail" 
+            before="-" template="Codecryption_Certificate::product/view/certificate-detail.phtml"/>
+        </referenceContainer>
+        
+        <!-- <referenceContainer name="alert.urls">
+            <referenceBlock name="product.info.options.wrapper.bottom">
+                <block class="Codecryption\Certificate\Block\Product\View\Certificate" name="product.info.certificate.1" as="certificate_detail_1" 
+                before="-" template="Codecryption_Certificate::product/view/certificate-detail.phtml"/>
+            </referenceBlock>
+        </referenceContainer> -->
+        <!-- <referenceBlock name="product.info.media">
+            <block class="Codecryption\Certificate\Block\Product\View\Certificate" name="product.info.certificate.1" as="certificate_detail_1" 
+            before="-" template="Codecryption_Certificate::product/view/certificate-detail.phtml"/>
+        </referenceBlock> -->
+        <move element="product.info.certificate" destination="product.info.media" after="product.info.media.image"/>
+        
+    </body>
+</page>

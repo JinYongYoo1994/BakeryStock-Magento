@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="clyde">
+        <job name="clyde_product_sync_custom" instance="Clyde\Warranty\Cron\Productsync" method="execute">
+            <schedule>0 1 * * *</schedule>
+        </job>
+        <job name="clyde_order_sync_custom" instance="Clyde\Warranty\Cron\Ordersync" method="execute">
+            <schedule>0 1 * * *</schedule>
+        </job>
+    </group>
+</config>

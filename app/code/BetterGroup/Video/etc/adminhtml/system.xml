@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="akeneo_connector">
+            <group id="product">
+                 <field id="video_gallery" translate="label" type="text" sortOrder="71" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Akeneo Video Attributes</label>
+                    <frontend_model>Akeneo\Connector\Block\Adminhtml\System\Config\Form\Field\Gallery</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <comment>Enter all PIM attributes containing product videos. All video specified will be imported to the product video gallery.</comment>
+                    <depends>
+                        <field id="media_enabled">1</field>
+                    </depends>
+                </field> 
+            </group>
+        </section>
+    </system>
+</config>

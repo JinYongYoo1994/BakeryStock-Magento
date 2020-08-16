@@ -1,0 +1,16 @@
+<button id="sync_product" title="Sync Product" type="button" class="action-default scalable save primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" data-ui-id="warranty-syncproduct-import-save-button" role="button" aria-disabled="false" onclick="syncProduct(this)"><span class="ui-button-text">
+    <span>Sync</span>
+</span></button>
+<input type="hidden" name="product_limit" id="product_limit" value="<?php echo $block->getHelper()->getProductLimit();?>"/>
+<input type="hidden" name="product_limit_page" id="product_limit_page" value="1"/>
+<div class="sync-progress" style="background: #ddd; margin: 15px 0;">
+    <div id="sync-progress-report" style="background: green;width: 0%; display: inline-block; color:#fff;text-align: center;  "></div>
+</div>
+<script type="text/javascript">
+           function syncProduct(obj){
+               require(['jquery', 'Clyde_Warranty/js/syncproduct'], function ($, script) {
+                   var url = "<?php echo $this->getUrl('warranty/sync/sync');?>";
+                script.syncProduct(url)
+            });
+           }
+</script>

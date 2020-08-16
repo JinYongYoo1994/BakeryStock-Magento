@@ -1,0 +1,75 @@
+<?php if($this->getModuleEnable() == 1):?>
+<?php   $warrant = $this->getWarrantyDetail();
+$checkOption = $this->checkOption();
+if(isset($warrant['isAllowProduct']) && $warrant['isAllowProduct'] === true):
+?>
+<?php $selectedWarranty = $block->getWarrantyDetailOfItem(); 
+    $buttonTitle = __('Select product protection');
+    $price = '';
+    $selected = '';
+    $selected_contract = '';
+    if($selectedWarranty !== false):
+        $buttonTitle = __('Added product protection');
+        $price = isset($selectedWarranty['customer_cost'])?$block->getPrice($selectedWarranty['customer_cost']):'';
+        $selected_contract = isset($selectedWarranty['plan_id'])?$selectedWarranty['plan_id']:'';
+        $selected = 'added';
+    endif;
+?>
+
+    <div class="xulumus-product-warranty-dropdown-<?php echo $this->getItem()->getSku();?> actions-toolbar clyde-cart-toolbar" id="xulumus-product-warranty-dropdown-<?php echo $this->getItem()->getId();?>" data-params='{"itemid":"<?php echo $this->getItem()->getId();?>","quote":"<?php echo $this->getItem()->getQuote()->getId();?>","warranty":"1","page":"cart","update_type" : "add","rule_id":"1","addurl":"<?php echo $this->getUrl('warranty/index/addwarranty');?>","removeurl":"<?php echo $this->getUrl('warranty/index/removewarranty');?>","selected_contract":"<?php echo $selected_contract;?>"}' >
+    </div>
+  <?php if($selectedWarranty === false):?>
+  <script type="text/javascript">
+      var id = '<?php echo $this->getItem()->getId();?>';
+      function createFunction<?php echo $this->getItem()->getId();?>(){
+          require(['jquery','Clyde_Warranty/js/warranty'],
+          function ($, warrantyObj) {
+            var contact = Clyde.getSelectedContract();
+          var element = $('#xulumus-product-warranty-dropdown-<?php echo $this->getItem()->getId();?>').attr('data-params');
+          var data = JSON.parse(element);
+          data.contract_detail = '';
+          var activeProduct = Clyde.getActiveProduct();
+          var selectedTurm = '';
+          if (typeof contact !== 'undefined' && contact !== null) {
+            $.each( activeProduct.contracts, function( key, value ) {
+              if(contact.sku == value.attributes.sku){
+                selectedTurm = value.attributes.term;
+              }
+            });
+          }
+          if(selectedTurm != ''){
+             contact.term = selectedTurm;
+          }
+          if(contact !== null){
+            data.warranty = contact.sku;
+            data.contract_detail = contact;
+            data.update_type = 'add';
+            warrantyObj.warrantyAdd(data.addurl, JSON.stringify(data));
+          }
+          });
+          
+      }
+    function openModal<?php echo $this->getItem()->getId();?>()
+    {
+      require(['jquery'],
+          function ($) {
+          var activeProduct = Clyde.getActiveProduct();
+          var element = $('#xulumus-product-warranty-dropdown-<?php echo $this->getItem()->getId();?>').attr('data-params');
+          var data = JSON.parse(element);
+          if(data.selected_contract != null){
+             Clyde.selectContract(data.selected_contract);
+          }
+      });
+    }
+  require(['jquery'],
+          function ($) {
+            $( document ).ready(function() {
+                addCartClyde("<?php echo $this->getItem()->getProduct()->getSku();?>","#xulumus-product-warranty-dropdown-<?php echo $this->getItem()->getId();?>",createFunction<?php echo $this->getItem()->getId();?>);
+                
+                    
+            });
+   });
+</script>
+<?php endif;?>
+<?php endif;?>
+<?php endif;?>

@@ -1,0 +1,126 @@
+<?php
+$product = $block->getProduct();
+$optionId = $product->getBrand();
+$_attributeLabel = $product->getResource()->getAttribute('shipping_time')->getFrontend()->getValue($product);
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection();
+$tableName = $resource->getTableName('mageplaza_brand');
+$sql = $connection->select()
+                ->from(['ab' => $tableName])
+                ->where('ab.option_id = '.$optionId.'');
+$result = $connection->fetchAll($sql);
+$freeShipArea = '';
+foreach($result as $res){
+	$freeShipArea = $res['free_shipping'];
+	break;
+}
+$freeShipAreaArray = array();
+$freeShipAreaArray = explode("|",$freeShipArea);
+$freShipStr = '';
+$i = 0;
+foreach($freeShipAreaArray as $freeShipAreaArr){
+	if($freeShipAreaArr!=''){
+		$i++;
+		$freShipStr .= $freeShipAreaArr.'<br>';
+	}
+}
+?>
+
+	<div class="shipping">
+		<p class="heading"> Free Shipping!</p>
+		<?php if($i>0){ ?>
+			<?php if($_attributeLabel):?>
+					<p class="paragraph">Ships in  <?php echo $_attributeLabel; ?> From 1 of </p>
+			<?php else :?>
+					<p class="paragraph">Ships in  24 - 48 Hours From 1 of </p>
+			<?php endif;?>
+			<p class="paragraph tooltip"><span class="locat"><?php echo $i; ?>  Locations</span><span class="question">?</span>
+			<span class="tooltiptext"><?php echo $freShipStr; ?></span>
+		   </p>
+		<?php }else{ ?>
+			<?php if($_attributeLabel):?>
+					<p class="paragraph">Ships in  <?php echo $_attributeLabel; ?></p>
+			<?php else :?>
+					<p class="paragraph">Ships in  24 - 48 Hours</p>
+			<?php endif;?>
+		<?php } ?>
+	</div>
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block; 
+}
+  div.tooltip + p{
+    display: none !important;
+  }
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 131px;
+    background-color: #fff;
+    color: black;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px 12px 10px 13px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -96px;
+    border: 1px solid rgba(127,127,127,0.16);
+    margin-bottom: 4px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+  
+.tooltip .tooltiptext:after {
+    right: 26px;
+    border: 10px solid transparent;
+    border-top-color: #fff;
+}
+
+.tooltip .tooltiptext:before, 
+.tooltip .tooltiptext:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    width: 0;
+    height: 0;
+}  
+
+.tooltip .tooltiptext:before {
+    right: 25px;
+    border: 11px solid transparent;
+    border-top-color: rgba(127,127,127,0.16);
+} 
+  
+.tooltip span.question {
+    border: 1px solid #000;
+    width: 23px;
+    display: inline-block;
+    border-radius: 50%;
+    height: 23px;
+    line-height: 22px;
+    font-weight: 600;
+    margin-left: 6px;
+}  
+.tooltip span.locat {
+    position: relative;
+}
+
+.tooltip span.locat:after {
+    position: absolute;
+    width: 98%;
+    height: 8px;
+    left: 1px;
+    right: 0;
+    bottom: 0px;
+    border-bottom: 1px dotted black;
+    content: "";
+    margin: auto;
+}  
+</style>  

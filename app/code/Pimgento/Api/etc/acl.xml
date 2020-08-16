@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Pimgento API Module
+ *
+ * @author    Agence Dn'D <contact@dnd.fr>
+ * @copyright 2018 Agence Dn'D
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      https://www.pimgento.com/
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Pimgento_Import::config_pimgento" title="Pimgento Section" />
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::system">
+                    <resource id="Pimgento_Api::pimgento" title="Pimgento Api" sortOrder="100">
+                        <resource id="Pimgento_Api::import" title="Import API" sortOrder="10">
+                            <resource id="Pimgento_Api::import_category" title="Categories" sortOrder="10" />
+                            <resource id="Pimgento_Api::import_family" title="Families" sortOrder="20" />
+                            <resource id="Pimgento_Api::import_attribute" title="Attributes" sortOrder="30" />
+                            <resource id="Pimgento_Api::import_option" title="Options" sortOrder="40" />
+                            <resource id="Pimgento_Api::import_product_model" title="Variants" sortOrder="50" />
+                            <resource id="Pimgento_Api::import_family_variant" title="Family Variant" sortOrder="60" />
+                            <resource id="Pimgento_Api::import_product" title="Products" sortOrder="70" />
+                        </resource>
+                        <resource id="Pimgento_Api::pimgento_log" title="Log" sortOrder="20" />
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
